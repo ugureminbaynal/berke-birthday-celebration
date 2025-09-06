@@ -1,0 +1,112 @@
+:root {
+  --flame: #E0453A;
+  --graphite: #111827;
+  --mist: #E5E7EB;
+  --ink: #0F172A;
+  --cyan-trace: #22D3EE;
+  --bg: #111827;
+  --surface: #0F172A;
+  --text: #E5E7EB;
+  --divider: #1F2937;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, Arial, sans-serif;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8px 8px 24px 8px;
+}
+
+h1 {
+  font-family: Sora, Inter, sans-serif;
+  font-size: 56px;
+  margin: 32px 0 24px;
+  color: var(--flame);
+  text-align: center;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px 12px;
+  margin: 40px 0 32px 0;
+  justify-content: center;
+  position: relative;
+  min-height: 100vh;
+}
+
+.image-container {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.gallery img {
+  border-radius: 24px;
+  filter: none;
+  box-shadow: 0 4px 24px rgba(224,69,58,0.10);
+  transition: box-shadow .22s, transform .22s, filter .22s;
+  border: 3px solid var(--divider);
+  max-width: 320px;
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+.gallery img:hover {
+  box-shadow: 0 8px 32px 8px rgba(224,69,58,0.25), 0 0 32px 8px var(--cyan-trace);
+  transform: scale(1.12) translateY(-4px);
+  border-color: var(--flame);
+  filter: brightness(1.25) saturate(1.4) drop-shadow(0 0 32px var(--flame));
+}
+
+.start-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.start-button {
+  padding: 20px 40px;
+  font-size: 24px;
+  background: var(--flame);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.start-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(224,69,58,0.3);
+}
+
+footer {
+  opacity: .8;
+  font-size: 12px;
+  margin-top: 48px;
+  text-align: center;
+}
+
+.link {
+  color: var(--cyan-trace);
+  text-decoration: none;
+  border-bottom: 1px dashed transparent;
+}
+
+.link:hover {
+  border-bottom-color: var(--cyan-trace);
+}
