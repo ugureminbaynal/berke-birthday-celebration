@@ -25,7 +25,7 @@ function BirthdayGallery() {
   ];
 
   const createConfettiAt = (container) => {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 15; i++) {
       const conf = document.createElement('div');
       conf.style.position = 'absolute';
       conf.style.width = '8px';
@@ -42,7 +42,7 @@ function BirthdayGallery() {
       conf.style.top = centerY + 'px';
       
       const angle = Math.random() * 2 * Math.PI;
-      const dist = 30 + Math.random() * 30;
+      const dist = 80 + Math.random() * 120; // Daha geniş alan
       const dx = Math.cos(angle) * dist;
       const dy = Math.sin(angle) * dist;
       
@@ -50,13 +50,13 @@ function BirthdayGallery() {
         { transform: 'translate(-50%, -50%)', opacity: 0.85 },
         { transform: `translate(${dx - 50}%, ${dy - 50}%)`, opacity: 0.1 }
       ], {
-        duration: 1000 + Math.random() * 500,
+        duration: 1500 + Math.random() * 1000, // Daha uzun süre
         easing: 'ease-out',
         fill: 'forwards'
       });
       
       container.appendChild(conf);
-      setTimeout(() => conf.remove(), 1500);
+      setTimeout(() => conf.remove(), 2500); // Daha uzun süre ekranda kalsın
     }
   };
 
