@@ -27,3 +27,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Cloudflare Pages
+.cache/
