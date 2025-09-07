@@ -25,45 +25,38 @@ function BirthdayGallery() {
   ];
 
   const createConfettiAt = (container) => {
-    // Tüm ekrana konfeti yay
-    const body = document.body;
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 20; i++) {
       const conf = document.createElement('div');
-      conf.style.position = 'fixed';
-      conf.style.width = '10px';
-      conf.style.height = '10px';
+      conf.style.position = 'absolute';
+      conf.style.width = '8px';
+      conf.style.height = '8px';
       conf.style.borderRadius = '50%';
       conf.style.background = ['#E0453A','#22D3EE','#F8FAFC','#FFD700','#43c6ac'][Math.floor(Math.random()*5)];
-      conf.style.opacity = '0.9';
+      conf.style.opacity = '0.85';
       conf.style.pointerEvents = 'none';
-      conf.style.zIndex = '9999';
+      conf.style.zIndex = '10';
       
-      // Ekranın herhangi bir yerinden başla
-      const startX = Math.random() * screenWidth;
-      const startY = Math.random() * screenHeight;
-      conf.style.left = startX + 'px';
-      conf.style.top = startY + 'px';
+      const centerX = container.offsetWidth / 2;
+      const centerY = container.offsetHeight / 2;
+      conf.style.left = centerX + 'px';
+      conf.style.top = centerY + 'px';
       
-      // Rastgele yöne doğru hareket et
       const angle = Math.random() * 2 * Math.PI;
-      const dist = 200 + Math.random() * 300; // Çok daha geniş alan
+      const dist = 100 + Math.random() * 150; // Daha geniş alan
       const dx = Math.cos(angle) * dist;
       const dy = Math.sin(angle) * dist;
       
       conf.animate([
-        { transform: 'translate(-50%, -50%)', opacity: 0.9 },
+        { transform: 'translate(-50%, -50%)', opacity: 0.85 },
         { transform: `translate(${dx - 50}%, ${dy - 50}%)`, opacity: 0.1 }
       ], {
-        duration: 2000 + Math.random() * 1500, // Daha uzun süre
+        duration: 1500 + Math.random() * 1000,
         easing: 'ease-out',
         fill: 'forwards'
       });
       
-      body.appendChild(conf);
-      setTimeout(() => conf.remove(), 3500); // Daha uzun süre ekranda kalsın
+      container.appendChild(conf);
+      setTimeout(() => conf.remove(), 2500);
     }
   };
 
