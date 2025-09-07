@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 function BirthdayGallery() {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
-  const confettiIntervalRef = useRef(null);
   
   const images = [
     "images/WhatsApp Görsel 2025-07-02 saat 14.22.35_34c579dc.jpg",
@@ -25,14 +24,14 @@ function BirthdayGallery() {
   ];
 
   const createConfettiAt = (container) => {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 30; i++) {
       const conf = document.createElement('div');
       conf.style.position = 'absolute';
-      conf.style.width = '8px';
-      conf.style.height = '8px';
+      conf.style.width = '10px';
+      conf.style.height = '10px';
       conf.style.borderRadius = '50%';
       conf.style.background = ['#E0453A','#22D3EE','#F8FAFC','#FFD700','#43c6ac'][Math.floor(Math.random()*5)];
-      conf.style.opacity = '0.85';
+      conf.style.opacity = '0.9';
       conf.style.pointerEvents = 'none';
       conf.style.zIndex = '10';
       
@@ -42,21 +41,21 @@ function BirthdayGallery() {
       conf.style.top = centerY + 'px';
       
       const angle = Math.random() * 2 * Math.PI;
-      const dist = 30 + Math.random() * 30;
+      const dist = 800 + Math.random() * 1200;
       const dx = Math.cos(angle) * dist;
       const dy = Math.sin(angle) * dist;
       
       conf.animate([
-        { transform: 'translate(-50%, -50%)', opacity: 0.85 },
+        { transform: 'translate(-50%, -50%)', opacity: 0.9 },
         { transform: `translate(${dx - 50}%, ${dy - 50}%)`, opacity: 0.1 }
       ], {
-        duration: 1000 + Math.random() * 500,
+        duration: 2000 + Math.random() * 1000,
         easing: 'ease-out',
         fill: 'forwards'
       });
       
       container.appendChild(conf);
-      setTimeout(() => conf.remove(), 1500);
+      setTimeout(() => conf.remove(), 3000);
     }
   };
 
@@ -64,45 +63,9 @@ function BirthdayGallery() {
     setIsPlaying(true);
     audioRef.current.volume = 0.5;
     audioRef.current.play();
-    
-    const startConfetti = () => {
-      document.querySelectorAll('.image-container').forEach(container => {
-        if (isElementInViewport(container)) {
-          createConfettiAt(container);
-        }
-      });
-    };
-
-    startConfetti();
-    confettiIntervalRef.current = setInterval(startConfetti, 2000);
   };
 
-  const isElementInViewport = (el) => {
-    const rect = el.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-    return (
-      rect.top <= windowHeight &&
-      rect.bottom >= 0 &&
-      rect.left <= windowWidth &&
-      rect.right >= 0
-    );
-  };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (isPlaying) {
-        document.querySelectorAll('.image-container').forEach(container => {
-          if (isElementInViewport(container)) {
-            createConfettiAt(container);
-          }
-        });
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isPlaying]);
 
   return (
     <div className="wrap">
@@ -125,17 +88,25 @@ function BirthdayGallery() {
       
       <h1>Mutlu Yıllar, Berke! 🎉</h1>
       
-      <div className="gallery">
-        {images.map((src, index) => (
-          <div key={index} className="image-container">
-            <img src={src} alt={`Berke Fotoğrafı ${index + 1}`} />
-          </div>
-        ))}
-      </div>
+       <div className="gallery">
+         {images.map((src, index) => (
+           <div 
+             key={index} 
+             className="image-container"
+             onMouseEnter={() => {
+               if (isPlaying) {
+                 createConfettiAt(document.querySelectorAll('.image-container')[index]);
+               }
+             }}
+           >
+             <img src={src} alt={`Berke Fotoğrafı ${index + 1}`} />
+           </div>
+         ))}
+       </div>
       
-      <footer>
-        Seviliyorsun. — ekibin · <a className="link" href="mailto:berke@example.com">Mail</a>
-      </footer>
+       <footer>
+         Seviliyorsun. — UĞUR VE METEHAN
+       </footer>
     </div>
   );
 }

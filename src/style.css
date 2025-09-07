@@ -13,8 +13,27 @@
 body {
   margin: 0;
   background: var(--bg);
+  background-image: url('images/recep.jpg');
+  background-size: 120px 120px;
+  background-repeat: repeat;
+  background-position: 0 0, 180px 180px;
+  background-attachment: fixed;
+  background-blend-mode: overlay;
   color: var(--text);
   font-family: Inter, system-ui, Arial, sans-serif;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 24, 39, 0.3);
+  z-index: -2;
+  pointer-events: none;
 }
 
 .wrap {
@@ -46,6 +65,7 @@ h1 {
   width: fit-content;
   margin: 0 auto;
   overflow: visible;
+  z-index: 1;
 }
 
 .gallery img {
@@ -96,7 +116,8 @@ h1 {
 
 footer {
   opacity: .8;
-  font-size: 12px;
+  font-size: 18px;
+  font-weight: bold;
   margin-top: 48px;
   text-align: center;
 }
